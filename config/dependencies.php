@@ -7,9 +7,17 @@
  */
 use DI\Container;
 use MusicAPI\Controllers\ArtistController;
-    return function(Container $container) {
+use MusicAPI\Controllers\SongController;
+
+return function(Container $container) {
 // Make artist dependency
         $container->set('Artist', function() {
+            return new ArtistController();
+        });
+        $container->set('Song', function() {
+            return new SongController();
+        });
+        $container->set('ArtistController', function() {
             return new ArtistController();
         });
     };

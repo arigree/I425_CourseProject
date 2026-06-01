@@ -1,8 +1,8 @@
 {
   "require": {
     "slim/slim": "4.*",
-    "slim/psr7": "^1.8",
-    "php-di/php-di": "^7.1",
+    "slim/psr7": "*",
+    "php-di/php-di": "*",
     "illuminate/database": "9.*"
   },
   "autoload": {

@@ -29,7 +29,7 @@ class Artist extends Model{
         return $artist;
     }
 
-    //View a specific professor by id
+    //View a specific artist by id
     public static function getArtistById(int $id) {
         $artist = self::findOrFail($id); //?
         return $artist;

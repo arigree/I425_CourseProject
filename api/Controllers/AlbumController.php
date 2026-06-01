@@ -14,7 +14,7 @@ use MusicAPI\Controllers\ControllerHelper as Helper;
 class AlbumController {
     //get all artists
     public function index(Request $request, Response $response, array $args) : Response {
-        $results = Album::getAlbum($request);
+        $results = Album::getAlbum();
         return Helper::withJson($response, $results, 200);
     }
     //view a specific artist

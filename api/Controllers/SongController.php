@@ -14,7 +14,7 @@ use MusicAPI\Controllers\ControllerHelper as Helper;
 class SongController {
     //get all artists
     public function index(Request $request, Response $response, array $args) : Response {
-        $results = Song::getSong($request);
+        $results = Song::getSong();
         return Helper::withJson($response, $results, 200);
     }
     //view a specific artist
@@ -22,5 +22,11 @@ class SongController {
         $id = $args['id'];
         $results = Song::getSongById($id);
         return Helper::withJson($response, $results, 200);
+    }
+
+    //adding relationship method
+    public function artists(Request $request, Response $response, array $args) : Response {
+        $song = Song::findOrFail($args['id']);
+        return Helper::withJson($response, ['data' => $song->artists], 200);
     }
 }

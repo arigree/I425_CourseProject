@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Album extends Model{
     //table associated with model
-    protected $table = 'song';
+    protected $table = 'album';
     //table's primary key
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'albumID';
     //if release date and add date don't match
     public $timestamps = false;
     //pk is int, still specify
@@ -21,12 +21,16 @@ class Album extends Model{
     public $incrementing = true;
 
     public static function getAlbum() {
-        $song = self::all();
-        return $song;
+        return self::all();
+
     }
-    //View a specific professor by id
+    //View a specific album by id
     public static function getAlbumById(int $id) {
-        $song = self::findOrFail($id); //?
-        return $song;
+        return self::findOrFail($id); //?
+
+    }
+
+    public function artist(){
+        return $this->belongsTo(Artist::class, 'artistID', 'artistID');
     }
 }

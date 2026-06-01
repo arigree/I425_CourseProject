@@ -13,7 +13,7 @@ class Song extends Model{
     //table associated with model
     protected $table = 'song';
     //table's primary key
-    protected $primaryKey = 'id';
+    protected $primaryKey = 'songID';
     //if release date and add date don't match
     public $timestamps = false;
     //pk is int, still specify
@@ -22,12 +22,15 @@ class Song extends Model{
     public $incrementing = true;
 
     public static function getSong() {
-        $songs = self::all();
-        return $songs;
+        return self::all();
+
     }
-    //View a specific professor by id
+    //View a specific song by id
     public static function getSongById(int $id) {
-        $song = self::findOrFail($id); //?
-        return $song;
+        return self::findOrFail($id);
+    }
+
+    public function artists(){
+        return $this->belongsToMany(Artist::class, 'artist_song', 'songID', ' artistID');
     }
 }

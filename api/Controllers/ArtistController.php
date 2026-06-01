@@ -28,4 +28,15 @@ class ArtistController {
         return Helper::withJson($response, $results, 200);
     }
 
+    //adding relationship method
+    public function albums(Request $request, Response $response, array $args) : Response {
+        $artist = Artist::findOrFail($args['id']);
+        return Helper::withJson($response, ['data' => $artist->albums], 200);
+    }
+
+    public function songs(Request $request, Response $response, array $args) : Response{
+        $artist = Artist::findOrFail($args['id']);
+        return Helper::withJson($response, ['data' => $artist->songs], 200);
+    }
+
 }

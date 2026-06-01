@@ -31,10 +31,13 @@ return function (App $app) {
         $group->group('/artist', function (RouteCollectorProxy $group) {
             $group->get('/{id}', 'Artist:view');
             $group->get('', 'Artist:index');
+            $group->get('/{id}/album', 'Artist:albums');
+            $group->get('/{id}/song', 'Artist:songs');
         });
         $group->group('/song', function (RouteCollectorProxy $group) {
             $group->get('/{id}', 'Song:view');
             $group->get('', 'Song:index');
+            $group->get('/{id}/artist', 'Song:artists');
         });
         $group->group('/album', function (RouteCollectorProxy $group) {
             $group->get('/{id}', 'Album:view');

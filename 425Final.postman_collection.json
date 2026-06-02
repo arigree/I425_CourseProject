@@ -14,7 +14,18 @@
           "name": "Get All Artists",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/v1/artist",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "artist"
+              ]
+            }
           },
           "response": []
         },
@@ -22,7 +33,19 @@
           "name": "Get Artist By ID",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "GET {{base_url}}/api/v1/artist/1",
+              "host": [
+                "GET {{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "artist",
+                "1"
+              ]
+            }
           },
           "response": []
         }
@@ -35,7 +58,18 @@
           "name": "Get All Albums",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "GET {{base_url}}/api/v1/album",
+              "host": [
+                "GET {{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "album"
+              ]
+            }
           },
           "response": []
         },
@@ -43,7 +77,19 @@
           "name": "Get Album By ID",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "GET {{base_url}}/api/v1/album/1",
+              "host": [
+                "GET {{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "album",
+                "1"
+              ]
+            }
           },
           "response": []
         }
@@ -56,7 +102,18 @@
           "name": "Get All Songs",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "GET {{base_url}}/api/v1/song",
+              "host": [
+                "GET {{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "song"
+              ]
+            }
           },
           "response": []
         },
@@ -64,7 +121,19 @@
           "name": "Get Song By ID",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "GET {{base_url}}/api/v1/song/1",
+              "host": [
+                "GET {{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "song",
+                "1"
+              ]
+            }
           },
           "response": []
         }
@@ -77,7 +146,20 @@
           "name": "Get Albums By Artist",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "GET {{base_url}}/api/v1/artist/1/album",
+              "host": [
+                "GET {{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "artist",
+                "1",
+                "album"
+              ]
+            }
           },
           "response": []
         },
@@ -85,7 +167,20 @@
           "name": "Get Artists By Song",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "GET {{base_url}}/api/v1/song/1/artist",
+              "host": [
+                "GET {{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "song",
+                "1",
+                "artist"
+              ]
+            }
           },
           "response": []
         }

@@ -30,7 +30,37 @@ class Song extends Model{
         return self::findOrFail($id);
     }
 
+    //create a song
+    public static function createSong($request) {
+        $params = $request ->getParsedBody();
+        $song = new Song();
+
+        foreach ($params as $field => $value) {
+            $song->$field = $value;
+
+        }
+        $song -> save();
+        return $song;
+    }
+
+    //Update an Song
+    public static function updateSong($request) {
+        $params = $request->getParsedBody();
+        $id = $request->getAttribute('id');
+        $song = self::findOrFail($id);
+        if(!$song) {
+            return false;
+        }
+
+        foreach($params as $field => $value) {
+            $song->$field = $value;
+        }
+
+        $song->save();
+        return $song;
+    }
+
     public function artists(){
-        return $this->belongsToMany(Artist::class, 'artist_song', 'songID', ' artistID');
+        return $this->belongsToMany(Artist::class, 'artist_song', 'songID', 'artistID');
     }
 }

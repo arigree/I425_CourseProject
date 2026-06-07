@@ -30,6 +30,35 @@ class Album extends Model{
 
     }
 
+    public static function createAlbum($request) {
+        $params = $request ->getParsedBody();
+        $album = new Album();
+
+        foreach ($params as $field => $value) {
+            $album->$field = $value;
+
+        }
+        $album -> save();
+        return $album;
+    }
+
+    //Update an album
+    public static function updateAlbum($request) {
+        $params = $request->getParsedBody();
+        $id = $request->getAttribute('id');
+        $album = self::findOrFail($id);
+        if(!$album) {
+            return false;
+        }
+
+        foreach($params as $field => $value) {
+            $album->$field = $value;
+        }
+
+        $album->save();
+        return $album;
+    }
+
     public function artist(){
         return $this->belongsTo(Artist::class, 'artistID', 'artistID');
     }

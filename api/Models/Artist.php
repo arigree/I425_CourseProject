@@ -35,8 +35,62 @@ class Artist extends Model{
         return $artist;
     }
 
-    public function songs(){
-        return $this->belongsToMany(Song::class, 'artist_song', 'artistID', 'songID');
+    //create a new student
+    public static function createArtist($request) {
+        $params = $request ->getParsedBody();
+        $artist = new Artist();
+
+        foreach ($params as $field => $value) {
+            $artist->$field = $value;
+
+        }
+        $artist -> save();
+        return $artist;
     }
 
+    //delete an artist
+    public static function deleteArtist($request) {
+        $id = $request ->getAttribute('id');            //attribute vs parsedbody?
+        $artist = self::findOrFail($id);
+        return($artist ? $artist->delete() : $artist);
+    }
+
+    //Update an artist
+    public static function updateArtist($request) {
+        $params = $request->getParsedBody();
+        $id = $request->getAttribute('id');
+        $artist = self::findOrFail($id);
+        if(!$artist) {
+            return false;
+        }
+
+        foreach($params as $field => $value) {
+            $artist->$field = $value;
+        }
+
+        $artist->save();
+        return $artist;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //relationship functions
+    public function songs(){
+        return $this->belongsToMany(Song::class, 'artist-song', 'artistID', 'songID');
+    }
+
+    //add the one to many function
+    public function albums(){
+        return $this->hasMany(Album::class, 'artistID', 'artistID',);
+    }
 }

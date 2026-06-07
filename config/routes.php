@@ -33,22 +33,43 @@ return function (App $app) {
             $group->get('', 'Artist:index');
             $group->get('/{id}/album', 'Artist:albums');
             $group->get('/{id}/song', 'Artist:songs');
+            $group->post('', 'Artist:create');
+            $group->delete('/{id}', 'Artist:delete');
+            $group->put('/{id}', 'Artist:update');
         });
         $group->group('/song', function (RouteCollectorProxy $group) {
             $group->get('/{id}', 'Song:view');
             $group->get('', 'Song:index');
             $group->get('/{id}/artist', 'Song:artists');
+            $group->post('', 'Song:create');
+            $group->delete('/{id}', 'Song:delete');
+            $group->put('/{id}', 'Song:update');
         });
         $group->group('/album', function (RouteCollectorProxy $group) {
             $group->get('/{id}', 'Album:view');
             $group->get('', 'Album:index');
+            $group->post('', 'Album:create');
+            $group->delete('/{id}', 'Album:delete');
+            $group->put('/{id}', 'Album:update');
         });
     });
+
+
+    $app->get('/ping', function ($request, $response) {
+        $response->getBody()->write("OK PING");
+        return $response;
+    });
+
 
 // Handle invalid routes
     $app->any('{route:.*}', function(Request $request, Response $response) {
         $response->getBody()->write("Page Not Found");
         return $response->withStatus(404);
     });
+
+
+
+
+
 
 };

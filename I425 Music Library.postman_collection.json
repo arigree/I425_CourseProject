@@ -1,10 +1,10 @@
 {
   "info": {
-    "_postman_id": "84d3b603-657a-448c-af42-7355aa755c3b",
-    "name": "I425 Music Library Copy",
+    "_postman_id": "83834b67-6376-4a7c-94c0-6616fd79182b",
+    "name": "I425 Music Library",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "55026750",
-    "_collection_link": "https://go.postman.co/collection/55026750-84d3b603-657a-448c-af42-7355aa755c3b?source=collection_link"
+    "_exporter_id": "55055907",
+    "_collection_link": "https://go.postman.co/collection/55055907-83834b67-6376-4a7c-94c0-6616fd79182b?source=collection_link"
   },
   "item": [
     {
@@ -490,7 +490,7 @@
   "variable": [
     {
       "key": "base_url",
-      "value": "http://localhost/I425/I425_CourseProject"
+      "value": "http://localhost/I425/I425_CourseProject/api/v1"
     }
   ]
 }

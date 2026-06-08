@@ -98,6 +98,26 @@ class Song extends Model{
         return $song;
     }
 
+    // Search for songs
+    public static function searchSongs($term) {
+        if (is_numeric($term)) {
+            $query = self::where('songID', '=', $term)
+                ->orWhere('plays', '>=', $term)
+                ->orWhere('genreID', '=', $term)
+                ->orWhere('albumID', '=', $term);
+        } else {
+            $query = self::where('songID', 'like', "%$term%")
+                ->orWhere('songTitle', 'like', "%$term%")
+                ->orWhere('duration', 'like', "%$term%")
+                ->orWhere('releaseDate', 'like', "%$term%")
+                ->orWhere('plays', 'like', "%$term%")
+                ->orWhere('genreID', 'like', "%$term%")
+                ->orWhere('albumID', 'like', "%$term%");
+        }
+
+        return $query->with('artist')->get();
+    }
+
     public function artist(){
         return $this->belongsToMany(Artist::class, 'artist_song', 'songID', 'artistID');
     }

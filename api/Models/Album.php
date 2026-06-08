@@ -96,6 +96,21 @@ class Album extends Model{
         return $album;
     }
 
+    //Search an album
+    public static function searchAlbums($term) {
+        if (is_numeric($term)) {
+            $query = self::where('albumID', '=', $term);
+        } else {
+            $query = self::where('albumID', 'like', "%$term%")
+                ->orWhere('title', 'like', "%$term%")
+                ->orWhereHas('artist', function ($q) use ($term) {
+                    $q->where('name', 'like', "%$term%");
+                });
+        }
+
+        return $query->with('artist')->get();
+    }
+
     public function artist(){
         return $this->belongsTo(Artist::class, 'artistID', 'artistID');
     }

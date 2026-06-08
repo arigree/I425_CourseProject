@@ -16,7 +16,11 @@ use MusicAPI\Validation\Validator;
 class ArtistController {
     //list all artists
     public function index(Request $request, Response $response, array $args) : Response {
-        $results = Artist::getArtist($request);
+        $params = $request->getQueryParams();
+        $term = array_key_exists('q', $params) ? $params['q'] : "";
+
+        $results = ($term) ? Artist::searchArtists($term) : Artist::getArtist($request);
+
         return Helper::withJson($response, $results, 200);
     }
 
@@ -86,13 +90,13 @@ class ArtistController {
 
 
     //adding relationship method
-    public function albums(Request $request, Response $response, array $args) : Response {
+    public function album(Request $request, Response $response, array $args) : Response {
         $artist = Artist::findOrFail($args['id']);
-        return Helper::withJson($response, ['data' => $artist->albums], 200);
+        return Helper::withJson($response, ['data' => $artist->album], 200);
     }
 
-    public function songs(Request $request, Response $response, array $args) : Response{
+    public function song(Request $request, Response $response, array $args) : Response{
         $artist = Artist::findOrFail($args['id']);
-        return Helper::withJson($response, ['data' => $artist->songs], 200);
+        return Helper::withJson($response, ['data' => $artist->song], 200);
     }
 }

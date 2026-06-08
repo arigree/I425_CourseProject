@@ -110,6 +110,18 @@ class Artist extends Model{
         return $artist;
     }
 
+    // Search for artists
+    public static function searchArtists($term) {
+        if (is_numeric($term)) {
+            $query = self::where('artistID', '=', $term);
+        } else {
+            $query = self::where('artistID', 'like', "%$term%")
+                ->orWhere('artistName', 'like', "%$term%");
+        }
+
+        return $query->with('song', 'album')->get();
+    }
+
     //relationship functions
     public function song(){
         return $this->belongsToMany(Song::class, 'artist-song', 'artistID', 'songID');

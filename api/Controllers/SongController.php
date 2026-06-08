@@ -80,4 +80,16 @@ class SongController {
         return Helper::withJson($response, $results, 200);
     }
 
+    // Delete a song
+    public function delete(Request $request, Response $response, array $args) : Response {
+        $song = Song::deleteSong($request);
+        if (!$song) {
+            $results['status'] = "Song cannot been deleted.";
+            return Helper::withJson($response, $results, 500);
+        }
+
+        $results['status'] = "Song has been deleted.";
+        return Helper::withJson($response, $results, 200);
+    }
+
 }

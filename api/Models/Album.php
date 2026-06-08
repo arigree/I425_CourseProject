@@ -96,6 +96,13 @@ class Album extends Model{
         return $album;
     }
 
+    //Delete an album
+    public static function deleteAlbum($request) {
+        $id = $request->getAttribute('id');
+        $album = self::findOrFail($id);
+        return ($album ? $album->delete() : $album);
+    }
+
     //Search an album
     public static function searchAlbums($term) {
         if (is_numeric($term)) {

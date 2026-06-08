@@ -98,6 +98,13 @@ class Song extends Model{
         return $song;
     }
 
+    // Delete a song
+    public static function deleteSong($request) {
+        $id = $request->getAttribute('id');
+        $song = self::findOrFail($id);
+        return ($song ? $song->delete() : $song);
+    }
+
     // Search for songs
     public static function searchSongs($term) {
         if (is_numeric($term)) {

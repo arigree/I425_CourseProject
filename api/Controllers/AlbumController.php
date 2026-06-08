@@ -12,9 +12,11 @@ use MusicAPI\Models\Album;
 use MusicAPI\Controllers\ControllerHelper as Helper;
 use MusicAPI\Validation\Validator;
 
-class AlbumController {
+class AlbumController
+{
     //get all artists
-    public function index(Request $request, Response $response, array $args) : Response {
+    public function index(Request $request, Response $response, array $args): Response
+    {
         $params = $request->getQueryParams();
         $term = array_key_exists('q', $params) ? $params['q'] : "";
 
@@ -22,16 +24,19 @@ class AlbumController {
 
         return Helper::withJson($response, $results, 200);
     }
+
     //view a specific artist
-    public function view(Request $request, Response $response, array $args) : Response {
+    public function view(Request $request, Response $response, array $args): Response
+    {
         $id = $args['id'];
         $results = Album::getAlbumById($id);
         return Helper::withJson($response, $results, 200);
     }
 
-    public function create(Request $request, Response $response, array $args) : Response {
+    public function create(Request $request, Response $response, array $args): Response
+    {
         $validation = Validator::validateAlbum($request);
-        if(!$validation) {
+        if (!$validation) {
             $results = [
                 'status' => "Validation failed",
                 'errors' => Validator::getErrors()
@@ -52,7 +57,7 @@ class AlbumController {
     }
 
     //update an albyum
-    public function update(Request $request, Response $response, array $args) : Response
+    public function update(Request $request, Response $response, array $args): Response
     {
         $validation = Validator::validateAlbum($request);
         if (!$validation) {
@@ -71,6 +76,18 @@ class AlbumController {
             'status' => "Album has been updated.",
             'data' => $album
         ];
+        return Helper::withJson($response, $results, 200);
+    }
+
+    //Delete an album
+    public function delete(Request $request, Response $response, array $args): Response
+    {
+        $album = Album::deleteAlbum($request);
+        if (!$album) {
+            $results['status'] = "album cannot be deleted.";
+            return Helper::withJson($response, $results, 500);
+        }
+        $results['status'] = "album has been deleted.";
         return Helper::withJson($response, $results, 200);
     }
 

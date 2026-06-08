@@ -126,7 +126,7 @@ class Song extends Model{
     }
 
     public function artist(){
-        return $this->belongsToMany(Artist::class, 'artist_song', 'songID', 'artistID');
+        return $this->belongsToMany(Artist::class, 'artist-song', 'songID', 'artistID');
     }
     // Return an array of links for pagination. The array includes links for the current, first, next, and last pages.
     private static function getLinks($request, $limit, $offset) {

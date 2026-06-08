@@ -109,9 +109,9 @@ class Album extends Model{
             $query = self::where('albumID', '=', $term);
         } else {
             $query = self::where('albumID', 'like', "%$term%")
-                ->orWhere('title', 'like', "%$term%")
+                ->orWhere('albumTitle', 'like', "%$term%")
                 ->orWhereHas('artist', function ($q) use ($term) {
-                    $q->where('name', 'like', "%$term%");
+                    $q->where('artistName', 'like', "%$term%");
                 });
         }
 

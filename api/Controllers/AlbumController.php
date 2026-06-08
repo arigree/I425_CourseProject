@@ -15,7 +15,7 @@ use MusicAPI\Validation\Validator;
 class AlbumController {
     //get all artists
     public function index(Request $request, Response $response, array $args) : Response {
-        $results = Album::getAlbum();
+        $results = Album::getAlbum($request);
         return Helper::withJson($response, $results, 200);
     }
     //view a specific artist

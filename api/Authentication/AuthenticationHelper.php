@@ -1,10 +1,10 @@
 <?php
 /**
- * Author: Benjamin Egger-Torke
- * Date: 6/13/26
+ * Author: Jonathan Nguyen
+ * Date: 6/15/2026
  * File: AuthenticationHelper.php
  * Description:
- **/
+ */
 
 namespace MusicAPI\Authentication;
 

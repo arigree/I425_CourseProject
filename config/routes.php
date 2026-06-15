@@ -10,6 +10,7 @@ use Slim\App;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Routing\RouteCollectorProxy;
+use MusicAPI\Authentication\{MyAuthenticator};
 
 return function (App $app) {
 // Create app routes
@@ -52,13 +53,9 @@ return function (App $app) {
             $group->delete('/{id}', 'Album:delete');
             $group->put('/{id}', 'Album:update');
         });
-    });
+    })->add(new MyAuthenticator());
 
 
-    $app->get('/ping', function ($request, $response) {
-        $response->getBody()->write("OK PING");
-        return $response;
-    });
 // User route group
     $app->group('/api/v1/users', function (RouteCollectorProxy $group) {
         $group->get('', 'User:index');

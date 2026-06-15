@@ -84,4 +84,14 @@ class User extends Model {
         return ($user ? $user->delete() : $user);
     }
 
+    //Authenticate usre
+    public static function authenticateUser($username, $password) {
+        $user =self::where('username', $username)->first();
+        if(!$user) {
+            return false;
+        }
+        return password_verify($password, $user->password) ? $user : false;
+    }
+
+
 }

@@ -1,0 +1,15 @@
+{
+    "require": {
+        "firebase/php-jwt": "^7.1",
+        "php-di/php-di": "^7.1",
+        "slim/psr7": "^1.8",
+        "illuminate/database": "12.17",
+        "respect/validation": "^2.4",
+        "slim/slim": "^4.15"
+    },
+    "autoload": {
+        "psr-4": {
+            "MusicAPI\\": "api/"
+        }
+    }
+}

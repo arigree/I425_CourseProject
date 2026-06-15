@@ -10,6 +10,11 @@ use Slim\App;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Routing\RouteCollectorProxy;
+use MusicAPI\Authentication\{
+    MyAuthenticator,
+    BasicAuthenticator,
+    BearerAuthenticator,
+};
 
 return function (App $app) {
 // Create app routes
@@ -52,8 +57,10 @@ return function (App $app) {
             $group->delete('/{id}', 'Album:delete');
             $group->put('/{id}', 'Album:update');
         });
-    });
-
+    //}); //No authenticator
+        ////})->add(new MyAuthenticator());
+    //})->add(new BasicAuthenticator()); // BasicAuthentication
+    })->add(new BearerAuthenticator()); // BearerAuthentication
 
     $app->get('/ping', function ($request, $response) {
         $response->getBody()->write("OK PING");
@@ -66,6 +73,7 @@ return function (App $app) {
         $group->post('', 'User:create');
         $group->put('/{id}', 'User:update');
         $group->delete('/{id}', 'User:delete');
+        $group->post('/authBearer', 'User:authBearer');
     });
 
 // Handle invalid routes

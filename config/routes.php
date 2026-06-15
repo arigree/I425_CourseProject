@@ -14,7 +14,9 @@ use MusicAPI\Authentication\{
     MyAuthenticator,
     BasicAuthenticator,
     BearerAuthenticator,
+    JWTAuthenticator
 };
+
 
 return function (App $app) {
 // Create app routes
@@ -66,14 +68,28 @@ return function (App $app) {
         $response->getBody()->write("OK PING");
         return $response;
     });
+
+    //JWT test route, to avoid changing bearer auth
+    $app->get('/api/v1/jwt-test', function (Request $request, Response $response) {
+        $response->getBody()->write(json_encode([
+            'Status' => 'JWT authentication successful'
+        ]));
+
+        return $response->withHeader('Content-Type', 'application/json');
+    })->add(new JWTAuthenticator());
+
+
 // User route group
     $app->group('/api/v1/users', function (RouteCollectorProxy $group) {
+        $group->post('/authBearer', 'User:authBearer');
+        $group->post('/authJWT', 'User:authJWT');
+
         $group->get('', 'User:index');
         $group->get('/{id}', 'User:view');
         $group->post('', 'User:create');
         $group->put('/{id}', 'User:update');
         $group->delete('/{id}', 'User:delete');
-        $group->post('/authBearer', 'User:authBearer');
+
     });
 
 // Handle invalid routes

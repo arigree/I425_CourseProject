@@ -121,4 +121,26 @@ class UserController {
         $results = ['Status' => 'Login successful', 'Token' => $token];
         return Helper::withJson($response, $results, 200);
     }
+    public function authJWT(Request $request, Response $response): Response
+    {
+        $params = $request->getParsedBody();
+        $username = $params['username'] ?? '';
+        $password = $params['password'] ?? '';
+
+        $user = User::authenticateUser($username, $password);
+        if (!$user) {
+            return Helper::withJson($response, ['Status' => 'Login failed.'], 401);
+        }
+
+        $jwt = User::generateJWT($user->id);
+
+        $results = [
+            'Status' => 'Login successful',
+            'jwt' => $jwt,
+            'name' => $user->name,
+            'role' => $user->role
+        ];
+
+        return Helper::withJson($response, $results, 200);
+    }
 }

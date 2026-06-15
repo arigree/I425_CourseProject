@@ -71,6 +71,18 @@ class Validator {
         return self::validate($request, $rules);
     }
 
+    // User validator
+    public static function validateUser($request) : bool {
+        $rules = [
+            'name' => v::alnum(' '),
+            'email' => v::email(),
+            'username' => v::notEmpty(),
+            'password' => v::notEmpty(),
+            'role' => v::number()->between(1, 3)
+        ];
+
+        return self::validate($request, $rules);
+    }
 
 
 

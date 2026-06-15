@@ -20,13 +20,13 @@ return function (App $app) {
     });
 // Add another route
     $app->get('/api/hello/{name}', function (Request $request, Response $response,
-                                             array $args) {
+                                             array   $args) {
         $response->getBody()->write("Hello " . $args['name']);
         return $response;
     });
 
 //Route group api/v1 pattern
-    $app->group('/api/v1', function(RouteCollectorProxy $group) {
+    $app->group('/api/v1', function (RouteCollectorProxy $group) {
 
         $group->group('/artist', function (RouteCollectorProxy $group) {
             $group->get('/{id}', 'Artist:view');
@@ -59,17 +59,20 @@ return function (App $app) {
         $response->getBody()->write("OK PING");
         return $response;
     });
-
+// User route group
+    $app->group('/api/v1/users', function (RouteCollectorProxy $group) {
+        $group->get('', 'User:index');
+        $group->get('/{id}', 'User:view');
+        $group->post('', 'User:create');
+        $group->put('/{id}', 'User:update');
+        $group->delete('/{id}', 'User:delete');
+    });
 
 // Handle invalid routes
-    $app->any('{route:.*}', function(Request $request, Response $response) {
+    $app->any('{route:.*}', function (Request $request, Response $response) {
         $response->getBody()->write("Page Not Found");
         return $response->withStatus(404);
     });
-
-
-
-
 
 
 };

@@ -9,6 +9,7 @@ use DI\Container;
 use MusicAPI\Controllers\ArtistController;
 use MusicAPI\Controllers\SongController;
 use MusicAPI\Controllers\AlbumController;
+use MusicAPI\Controllers\UserController;
 
 return function(Container $container) {
 // Make artist dependency
@@ -30,4 +31,7 @@ return function(Container $container) {
         $container->set('AlbumController', function() {
             return new AlbumController();
         });
+        $container->set('User', function() {
+            return new UserController();
+    });
     };

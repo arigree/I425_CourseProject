@@ -33,6 +33,21 @@ $app->addBodyParsingMiddleware();
 // Add the Slim built-in routing middleware
 $app->addRoutingMiddleware();
 
+$app->add(function ($request, $handler) {
+    $response = $handler->handle($request);
+
+    $response = $response->withHeader('Access-Control-Allow-Origin', 'http://localhost:3001')
+        ->withHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, Accept, Origin, X-Requested-With')
+        ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+        ->withHeader('Access-Control-Allow-Credentials', 'true');
+
+    if ($request->getMethod() === 'OPTIONS') {
+        return $response->withStatus(204);
+    }
+
+    return $response;
+});
+
 // Add Error Middleware
 $errorMiddleware = $app->addErrorMiddleware(true, true, true);
 

@@ -38,7 +38,7 @@ return function (App $app) {
         $group->group('/artist', function (RouteCollectorProxy $group) {
             $group->get('/{id}', 'Artist:view');
             $group->get('', 'Artist:index');
-            $group->get('/{id}/album', 'Artist:albums');
+            $group->get('/{id}/album', 'Artist:album');
             $group->get('/{id}/song', 'Artist:songs');
             $group->post('', 'Artist:create');
             $group->delete('/{id}', 'Artist:delete');
@@ -59,10 +59,11 @@ return function (App $app) {
             $group->delete('/{id}', 'Album:delete');
             $group->put('/{id}', 'Album:update');
         });
-    //}); //No authenticator
+        //}); //No authenticator
         ////})->add(new MyAuthenticator());
-    //})->add(new BasicAuthenticator()); // BasicAuthentication
-    })->add(new BearerAuthenticator()); // BearerAuthentication
+        //})->add(new BasicAuthenticator()); // BasicAuthentication
+        // })->add(new BearerAuthenticator()); // BearerAuthentication
+    })->add(new JWTAuthenticator());
 
     $app->get('/ping', function ($request, $response) {
         $response->getBody()->write("OK PING");
